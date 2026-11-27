@@ -39,12 +39,17 @@ def word_count_party(start_file_num, end_file_num):
                             word_count_demo[token] += 1
                         else:
                             word_count_demo[token] = 1
-    with open("wordCountDemo.txt", "w") as file:
+    with open("wordCountDemo.txt", "w") as demo_file:
         sorted_word_count = sorted(word_count_demo.items(), key=lambda x: x[1], reverse=True)
-        file.write(json.dumps(sorted_word_count))
-        with open("wordCountRep.txt", "w") as file:
+        demo_file.write(json.dumps(sorted_word_count))
+        with open("wordCountRep.txt", "w") as rep_file:
             sorted_word_count = sorted(word_count_rep.items(), key=lambda x: x[1], reverse=True)
-            file.write(json.dumps(sorted_word_count))
+            rep_file.write(json.dumps(sorted_word_count))
+    total_tokens_demo = sum(word_count_demo.values())
+    total_tokens_rep = sum(word_count_rep.values())
+    total_tokens = total_tokens_demo + total_tokens_rep
+    percent_tokens_rep = total_tokens / total_tokens_rep * 100
+    percent_tokens_demo = total_tokens / total_tokens_demo * 100
 
 
 if __name__ == '__main__':
